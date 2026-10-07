@@ -3,6 +3,7 @@ package mercadofacil.mercadofacil.Controller;
 import jakarta.validation.Valid;
 import mercadofacil.mercadofacil.Dto.ProdutoPostPutDto;
 import mercadofacil.mercadofacil.Dto.ProdutoResponseDto;
+import mercadofacil.mercadofacil.Service.ProdutoCrudPadraoService;
 import mercadofacil.mercadofacil.Service.ProdutoCrudService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,10 @@ public class ProdutoV1Controller {
     @Autowired
     ProdutoCrudService produtoCrudService;
 
+    //ProdutoV1Controller(Service.ProdutoCrudPadraoService produtoCrudPadraoService) {
+        //this.produtoCrudPadraoService = produtoCrudPadraoService;
+    //}
+
     @PostMapping("")
     public ResponseEntity<ProdutoResponseDto> criarProduto(
             @RequestBody @Valid ProdutoPostPutDto produtoPostPutDto) {
@@ -33,6 +38,21 @@ public class ProdutoV1Controller {
                 .status(HttpStatus.OK)
                 .body(produtoCrudService.buscarTodosProdutos());
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ProdutoResponseDto> atualizarProduto(
+            @PathVariable Long id, @Valid @RequestBody ProdutoPostPutDto produtoPostPutDto){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(produtoCrudService.editarProduto(id, produtoPostPutDto));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> removeProduto(
+        @PathVariable Long id){
+                produtoCrudService.removeProduto(id);
+                return ResponseEntity.noContent().build();
+        }
 
 
 }

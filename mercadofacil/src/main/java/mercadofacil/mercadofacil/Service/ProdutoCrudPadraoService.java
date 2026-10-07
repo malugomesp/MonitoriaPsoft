@@ -32,4 +32,20 @@ public class ProdutoCrudPadraoService implements ProdutoCrudService {
                 .map(produto -> modelMapper.map(produto, ProdutoResponseDto.class))
                 .toList();
     }
+
+    //@Override
+    //public ProdutoResponseDto editarProduto(ProdutoPostPutDto produtoPostPutDto) {
+        
+    //}
+
+    @Override
+    public void removeProduto(Long id) {
+        produtoRepository.deleteById(id);
+    }
+
+    @Override
+    public ProdutoResponseDto editarProduto(Long id, ProdutoPostPutDto produtoPostPutDto) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'editarProduto'");
+    }
 }
