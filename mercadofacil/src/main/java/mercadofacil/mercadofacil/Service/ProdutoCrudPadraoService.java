@@ -45,7 +45,10 @@ public class ProdutoCrudPadraoService implements ProdutoCrudService {
 
     @Override
     public ProdutoResponseDto editarProduto(Long id, ProdutoPostPutDto produtoPostPutDto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'editarProduto'");
+        Produto produtoExistente = produtoRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Produto não encontrado com esse id"));
+
+        produtoExistente.setNomeProduto(produtoPostPutDto.getNomeProduto());
+        produtoExistente.setCodigoBarras(produtoPostPutDto.getCodigoBarras());
     }
 }

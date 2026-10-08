@@ -41,7 +41,8 @@ public class ProdutoV1Controller {
 
     @PutMapping("/{id}")
     public ResponseEntity<ProdutoResponseDto> atualizarProduto(
-            @PathVariable Long id, @Valid @RequestBody ProdutoPostPutDto produtoPostPutDto){
+            @PathVariable Long id, 
+            @Valid @RequestBody ProdutoPostPutDto produtoPostPutDto){
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(produtoCrudService.editarProduto(id, produtoPostPutDto));
