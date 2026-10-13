@@ -46,9 +46,12 @@ public class ProdutoCrudPadraoService implements ProdutoCrudService {
     @Override
     public ProdutoResponseDto editarProduto(Long id, ProdutoPostPutDto produtoPostPutDto) {
         Produto produtoExistente = produtoRepository.findById(id)
-        .orElseThrow(() -> new RuntimeException("Produto não encontrado com esse id"));
+            .orElseThrow(() -> new RuntimeException("Produto não encontrado com esse id"));
 
         produtoExistente.setNomeProduto(produtoPostPutDto.getNomeProduto());
         produtoExistente.setCodigoBarras(produtoPostPutDto.getCodigoBarras());
+        produtoExistente.setValorProduto(produtoPostPutDto.getValorProduto());
+
+        return modelMapper.map(produtoRepository.save(produtoExistente), ProdutoResponseDto.class);
     }
 }

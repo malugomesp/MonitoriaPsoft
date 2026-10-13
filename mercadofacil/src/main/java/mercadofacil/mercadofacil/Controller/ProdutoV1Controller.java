@@ -49,11 +49,9 @@ public class ProdutoV1Controller {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> removeProduto(
-        @PathVariable Long id){
+    public ResponseEntity<?> removeProduto(@PathVariable Long id){
                 produtoCrudService.removeProduto(id);
                 return ResponseEntity.noContent().build();
         }
-
 
 }
